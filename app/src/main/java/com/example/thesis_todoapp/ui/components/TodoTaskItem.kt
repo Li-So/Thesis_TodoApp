@@ -1,14 +1,13 @@
 package com.example.thesis_todoapp.ui.components
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 
 
@@ -34,16 +33,17 @@ fun TodoTaskItem(
     modifier: Modifier = Modifier
 ){
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ){
         Checkbox(checked = checked, onCheckedChange = onCheckedChange)
+        Text(
+            modifier = Modifier,
+            text = taskName)
     }
 
-    Text(
-        modifier = Modifier
-            .padding(start = 16.dp),
-        text = taskName)
+
 }
 
 @Preview
