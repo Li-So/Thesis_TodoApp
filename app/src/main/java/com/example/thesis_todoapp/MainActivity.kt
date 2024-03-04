@@ -10,7 +10,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.thesis_todoapp.data.TodoItem
+import com.example.thesis_todoapp.ui.components.TodoTaskItemList
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
+import java.util.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +26,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Greeting("Android")
+                    TodoTaskItemList(Modifier, List(3) { TodoItem(it,"Hello", Date() ) } )
                 }
             }
         }

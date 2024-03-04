@@ -20,7 +20,9 @@ fun TodoTaskItem(taskName: String, modifier: Modifier = Modifier){
         taskName = taskName,
         checked = checkedState,
         onCheckedChange = { newValue -> checkedState = newValue },
-        onClose = { /*TODO*/ })
+        onClose = { /*TODO*/ },
+        modifier = modifier
+    )
 }
 
 @Composable
