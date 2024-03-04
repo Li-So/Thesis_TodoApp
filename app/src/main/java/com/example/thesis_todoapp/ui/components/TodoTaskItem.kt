@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,7 +14,7 @@ import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 
 @Composable
 fun TodoTaskItem(taskName: String, modifier: Modifier = Modifier){
-    var checkedState by remember { mutableStateOf(false) }
+    var checkedState by rememberSaveable { mutableStateOf(false) }
 
     TodoTaskItem(
         taskName = taskName,
