@@ -2,6 +2,7 @@ package com.example.thesis_todoapp.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -11,14 +12,16 @@ import java.util.*
 
 @Composable
 fun TodoTaskItemList(
+    list: List<TodoItem>,
+    onCloseTask: (TodoItem) -> Unit,
     modifier: Modifier = Modifier,
-    list: List<TodoItem>
 ){
     LazyColumn(
-        modifier = modifier
+        modifier = modifier,
+        state = rememberLazyListState()
     ){
         items(items = list, key = {todoTask -> todoTask.id}){
-            TodoTaskItem(taskName = it.label)
+            TodoTaskItem(taskName = it.label, onClose = { onCloseTask(it) })
         }
     }
 }
@@ -27,6 +30,6 @@ fun TodoTaskItemList(
 @Composable
 fun TodoTaskItemListPreview(){
     ThesisTodoAppTheme {
-        TodoTaskItemList(Modifier, List(3) { TodoItem(it,"Hello", Date() ) } )
+        TodoTaskItemList(List(3) { TodoItem(it,"Hello", Date() ) }, onCloseTask = {} )
     }
 }

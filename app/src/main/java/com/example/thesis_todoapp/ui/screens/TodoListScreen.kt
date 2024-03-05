@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,8 +38,13 @@ fun TodoListScreen(){
             modifier = Modifier
                 .fillMaxWidth()
         )
+
+        val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
+
         TodoTaskItemList(
-            list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) } } )
+            list = list,
+            onCloseTask = { todo -> list.remove(todo) }
+        )
     }
 }
 
