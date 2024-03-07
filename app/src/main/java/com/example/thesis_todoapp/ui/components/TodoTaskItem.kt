@@ -20,10 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
@@ -51,7 +48,14 @@ fun TodoTaskItem(
     onClose: () -> Unit,
     modifier: Modifier = Modifier
 ){
-    val dismissState = rememberDismissState()
+    val dismissState = rememberDismissState(
+        confirmStateChange = {
+            if(it == DismissValue.DismissedToStart){
+                onClose()
+                true
+            } else false
+        }
+    )
 
     SwipeToDismiss(
         state = dismissState,
@@ -63,11 +67,10 @@ fun TodoTaskItem(
                     DismissValue.DismissedToStart -> Color.Red
                 }, label = "Animate"
             )
-        }
+        },
+        directions = setOf(DismissDirection.EndToStart)
     ) {
-        if(dismissState.dismissDirection == DismissDirection.EndToStart){
-            onClose()
-        }
+
 
         Row(
             modifier = modifier
