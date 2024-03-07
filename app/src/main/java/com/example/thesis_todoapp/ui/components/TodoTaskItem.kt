@@ -60,13 +60,7 @@ fun TodoTaskItem(
     SwipeToDismiss(
         state = dismissState,
         background = {
-            val color by animateColorAsState(
-                when (dismissState.targetValue) {
-                    DismissValue.Default -> Color.Yellow
-                    DismissValue.DismissedToEnd -> Color.Green
-                    DismissValue.DismissedToStart -> Color.Red
-                }, label = "Animate"
-            )
+            DismissBackground(dismissState = dismissState)
         },
         directions = setOf(DismissDirection.EndToStart)
     ) {
