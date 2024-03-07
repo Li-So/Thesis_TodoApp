@@ -6,15 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.thesis_todoapp.data.TodoItem
-import com.example.thesis_todoapp.ui.components.TodoTaskItemList
 import com.example.thesis_todoapp.ui.screens.TodoListScreen
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
-import java.util.*
+import com.example.thesis_todoapp.viewmodels.TodoListViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,9 +24,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    TodoListScreen()
+                    AppScreen()
                 }
             }
         }
     }
+}
+
+@Composable
+fun AppScreen(todoListViewModel: TodoListViewModel = viewModel() ){
+    TodoListScreen(todoListViewModel)
 }

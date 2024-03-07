@@ -10,21 +10,19 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.example.thesis_todoapp.data.TodoItem
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.thesis_todoapp.ui.components.TodoTaskItemList
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
-import java.util.*
+import com.example.thesis_todoapp.viewmodels.TodoListViewModel
 
 @Composable
-fun TodoListScreen(){
+fun TodoListScreen(todoListViewModel: TodoListViewModel){
     Column(modifier = Modifier
         .fillMaxWidth(1f)
         .fillMaxHeight(1f)
@@ -39,11 +37,12 @@ fun TodoListScreen(){
                 .fillMaxWidth()
         )
 
-        val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
+        //val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
+        /*TODO*/
 
         TodoTaskItemList(
-            list = list,
-            onCloseTask = { todo -> list.remove(todo) }
+            list = todoListViewModel.tasks,
+            onCloseTask = { todo -> todoListViewModel.remove(todo) }
         )
     }
 }
@@ -52,6 +51,6 @@ fun TodoListScreen(){
 @Composable
 fun PreviewMainScreen(){
     ThesisTodoAppTheme {
-        TodoListScreen()
+        TodoListScreen(todoListViewModel = viewModel())
     }
 }
