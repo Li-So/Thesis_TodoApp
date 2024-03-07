@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Checkbox
+import androidx.compose.material.DismissDirection
 import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.SwipeToDismiss
@@ -19,6 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
@@ -47,7 +52,7 @@ fun TodoTaskItem(
     modifier: Modifier = Modifier
 ){
     val dismissState = rememberDismissState()
-    
+
     SwipeToDismiss(
         state = dismissState,
         background = {
@@ -60,6 +65,9 @@ fun TodoTaskItem(
             )
         }
     ) {
+        if(dismissState.dismissDirection == DismissDirection.EndToStart){
+            onClose()
+        }
 
         Row(
             modifier = modifier
@@ -70,7 +78,12 @@ fun TodoTaskItem(
             Checkbox(checked = checked, onCheckedChange = onCheckedChange)
             Text(
                 modifier = Modifier,
-                text = taskName)
+                text = taskName,
+                textDecoration = when(checked){
+                    true -> TextDecoration.LineThrough
+                    false -> null
+                }
+            )
         }
     }
 
