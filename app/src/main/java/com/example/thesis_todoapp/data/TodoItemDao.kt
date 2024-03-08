@@ -9,7 +9,7 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ItemDao {
+interface TodoItemDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(todo: TodoItem)
 
