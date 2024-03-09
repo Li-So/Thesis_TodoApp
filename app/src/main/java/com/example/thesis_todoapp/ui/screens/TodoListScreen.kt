@@ -55,12 +55,16 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
                     placeholder = { Text("Task name") }
                 )
                 OutlinedButton(
-                    onClick = { todoListViewModel.add(
-                        TodoItem(
-                            id = if(todoListViewModel.tasks.isEmpty()) 1 else todoListViewModel.tasks.last().id + 1,
-                            label = todoLabel,
-                            dateChecked = Date())
-                    )
+                    onClick = {
+                        if(todoLabel != ""){
+                            todoListViewModel.add(
+                                TodoItem(
+                                    id = if (todoListViewModel.tasks.isEmpty()) 1 else todoListViewModel.tasks.last().id + 1,
+                                    label = todoLabel,
+                                    dateChecked = Date()
+                                )
+                            )
+                        }
                     }
                 ) {
                     Text("Add")
