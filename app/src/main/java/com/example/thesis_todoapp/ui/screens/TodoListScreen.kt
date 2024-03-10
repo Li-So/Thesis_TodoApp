@@ -92,6 +92,12 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
                 coroutineScope.launch {
                     todoListViewModel.deleteTodoItem(todo)
                 }
+            },
+            onCheckedChange = { todo ->
+                coroutineScope.launch {
+                    todo.isChecked = !todo.isChecked
+                    todoListViewModel.updateTodoItem(todo)
+                }
             }
         )
     }

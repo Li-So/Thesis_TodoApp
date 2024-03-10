@@ -19,19 +19,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 
 
 @Composable
-fun TodoTaskItem(taskName: String, onClose: () -> Unit, modifier: Modifier = Modifier){
-    var checkedState by rememberSaveable { mutableStateOf(false) }
+fun TodoTaskItem(
+    taskName: String,
+    isChecked: Boolean,
+    onCheckedChange: () -> Unit,
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier){
+    var checkedState by rememberSaveable { mutableStateOf(isChecked) }
 
     TodoTaskItem(
         taskName = taskName,
         checked = checkedState,
-        onCheckedChange = { newValue -> checkedState = newValue },
+        onCheckedChange = { newBool -> checkedState = newBool ; onCheckedChange() },
         onClose =  onClose ,
         modifier = modifier
     )
@@ -84,12 +87,4 @@ fun TodoTaskItem(
 
 
 
-}
-
-@Preview
-@Composable
-fun TodoTaskItemPreview() {
-    ThesisTodoAppTheme {
-        TodoTaskItem("Hello", false, {}, {})
-    }
 }

@@ -14,6 +14,7 @@ import java.util.*
 fun TodoTaskItemList(
     list: List<TodoItem>,
     onCloseTask: (TodoItem) -> Unit,
+    onCheckedChange: (TodoItem) -> Unit,
     modifier: Modifier = Modifier,
 ){
     LazyColumn(
@@ -21,7 +22,12 @@ fun TodoTaskItemList(
         state = rememberLazyListState()
     ){
         items(items = list, key = {todoTask -> todoTask.id}){
-            TodoTaskItem(taskName = it.label, onClose = { onCloseTask(it) })
+            TodoTaskItem(
+                taskName = it.label,
+                isChecked = it.isChecked,
+                onCheckedChange = { onCheckedChange(it) },
+                onClose = { onCloseTask(it) }
+            )
         }
     }
 }
@@ -30,6 +36,6 @@ fun TodoTaskItemList(
 @Composable
 fun TodoTaskItemListPreview(){
     ThesisTodoAppTheme {
-        TodoTaskItemList(List(3) { TodoItem(it,"Hello", false, Date() ) }, onCloseTask = {} )
+        TodoTaskItemList(List(3) { TodoItem(it,"Hello", false, Date() ) }, onCheckedChange = {}, onCloseTask = {} )
     }
 }
