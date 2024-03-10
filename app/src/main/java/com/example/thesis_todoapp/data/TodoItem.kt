@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import java.util.Date
 
-@Entity(tableName = "todoItems")
+@Entity(tableName = "todo_items")
 data class TodoItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

@@ -1,27 +1,33 @@
 package com.example.thesis_todoapp.viewmodels
 
-import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.thesis_todoapp.data.TodoItem
 import com.example.thesis_todoapp.data.TodoItemsRepository
-import java.util.Date
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class TodoListViewModel(private val todoItemsRepository: TodoItemsRepository): ViewModel() {
     //val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
-    private val _todoTasks = List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList()
-    //private val _todoTasks = emptyList<TodoItem>().toMutableStateList()
-    val tasks: List<TodoItem>
-        get() = _todoTasks
+    val todoTasks: StateFlow<TodoItemList> = todoItemsRepository.getAllTodoItemsStream().map { TodoItemList(it) }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+        initialValue = TodoItemList()
+    )
 
-    fun remove(taskItem: TodoItem){
-        _todoTasks.remove(taskItem)
-    }
-
-    fun add(taskItem: TodoItem){
-        _todoTasks.add(taskItem)
+    suspend fun deleteTodoItem(taskItem: TodoItem){
+        todoItemsRepository.deleteTodoItem(taskItem)
     }
 
     suspend fun saveTodoItem(todoItem: TodoItem) {
         todoItemsRepository.insertTodoItem(todoItem)
     }
+
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
+    }
 }
+
+data class TodoItemList(val todoList: List<TodoItem> = listOf())

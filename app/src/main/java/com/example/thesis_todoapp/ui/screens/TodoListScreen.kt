@@ -9,6 +9,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,7 +26,6 @@ import com.example.thesis_todoapp.ui.components.SheetAddTodo
 import com.example.thesis_todoapp.ui.components.TodoTaskItemList
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 import com.example.thesis_todoapp.viewmodels.TodoListViewModel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -34,6 +34,7 @@ import java.util.Date
 fun TodoListScreen(todoListViewModel: TodoListViewModel){
     var todoLabel by rememberSaveable{ mutableStateOf("")}
     val coroutineScope = rememberCoroutineScope()
+    val todoList by todoListViewModel.todoTasks.collectAsState()
 
     Column(modifier = Modifier
         .fillMaxWidth(1f)
@@ -86,8 +87,12 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
         }
 
         TodoTaskItemList(
-            list = todoListViewModel.tasks,
-            onCloseTask = { todo -> todoListViewModel.remove(todo) }
+            list = todoList.todoList,
+            onCloseTask = { todo ->
+                coroutineScope.launch {
+                    todoListViewModel.deleteTodoItem(todo)
+                }
+            }
         )
     }
 }
