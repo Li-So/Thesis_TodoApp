@@ -5,18 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.thesis_todoapp.ui.screens.TodoListScreen
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
-import com.example.thesis_todoapp.viewmodels.TodoListViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.thesis_todoapp.ui.components.SheetAddTodo
 import com.example.thesis_todoapp.viewmodels.AppViewModelProvider
+import com.example.thesis_todoapp.viewmodels.TodoListViewModel
 
 
 class MainActivity : ComponentActivity() {

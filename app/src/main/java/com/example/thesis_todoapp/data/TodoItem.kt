@@ -2,7 +2,6 @@ package com.example.thesis_todoapp.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import java.util.Date
 
 @Entity(tableName = "todo_items")
