@@ -17,8 +17,12 @@ class TodoListViewModel(private val todoItemsRepository: TodoItemsRepository): V
         initialValue = TodoItemList()
     )
 
-    suspend fun deleteTodoItem(taskItem: TodoItem){
-        todoItemsRepository.deleteTodoItem(taskItem)
+    suspend fun updateTodoItem(todoItem: TodoItem){
+        todoItemsRepository.updateTodoItem(todoItem)
+    }
+
+    suspend fun deleteTodoItem(todoItem: TodoItem){
+        todoItemsRepository.deleteTodoItem(todoItem)
     }
 
     suspend fun saveTodoItem(todoItem: TodoItem) {
