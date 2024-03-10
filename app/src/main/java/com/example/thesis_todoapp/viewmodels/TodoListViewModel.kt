@@ -3,9 +3,10 @@ package com.example.thesis_todoapp.viewmodels
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import com.example.thesis_todoapp.data.TodoItem
+import com.example.thesis_todoapp.data.TodoItemsRepository
 import java.util.Date
 
-class TodoListViewModel: ViewModel() {
+class TodoListViewModel(private val todoItemsRepository: TodoItemsRepository): ViewModel() {
     //val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
     private val _todoTasks = List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList()
     //private val _todoTasks = emptyList<TodoItem>().toMutableStateList()
@@ -18,5 +19,9 @@ class TodoListViewModel: ViewModel() {
 
     fun add(taskItem: TodoItem){
         _todoTasks.add(taskItem)
+    }
+
+    suspend fun saveTodoItem(todoItem: TodoItem) {
+        todoItemsRepository.insertTodoItem(todoItem)
     }
 }

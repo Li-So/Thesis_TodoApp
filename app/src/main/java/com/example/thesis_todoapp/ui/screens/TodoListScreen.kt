@@ -11,6 +11,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -24,12 +25,15 @@ import com.example.thesis_todoapp.ui.components.SheetAddTodo
 import com.example.thesis_todoapp.ui.components.TodoTaskItemList
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 import com.example.thesis_todoapp.viewmodels.TodoListViewModel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodoListScreen(todoListViewModel: TodoListViewModel){
     var todoLabel by rememberSaveable{ mutableStateOf("")}
+    val coroutineScope = rememberCoroutineScope()
 
     Column(modifier = Modifier
         .fillMaxWidth(1f)
@@ -57,13 +61,22 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
                 OutlinedButton(
                     onClick = {
                         if(todoLabel != ""){
-                            todoListViewModel.add(
+                            /*todoListViewModel.add(
                                 TodoItem(
                                     id = if (todoListViewModel.tasks.isEmpty()) 1 else todoListViewModel.tasks.last().id + 1,
                                     label = todoLabel,
                                     dateChecked = Date()
                                 )
-                            )
+                            )*/
+                            coroutineScope.launch {
+                                todoListViewModel.saveTodoItem(
+                                    TodoItem(
+                                        label = todoLabel,
+                                        dateChecked = Date()
+                                    )
+                                )
+                            }
+
                         }
                     }
                 ) {

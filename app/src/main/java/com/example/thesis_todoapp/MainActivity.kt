@@ -16,6 +16,7 @@ import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 import com.example.thesis_todoapp.viewmodels.TodoListViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.thesis_todoapp.ui.components.SheetAddTodo
+import com.example.thesis_todoapp.viewmodels.AppViewModelProvider
 
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppScreen(todoListViewModel: TodoListViewModel = viewModel() ){
+fun AppScreen(todoListViewModel: TodoListViewModel = viewModel(factory = AppViewModelProvider.Factory) ){
     Row{
         TodoListScreen(todoListViewModel)
     }
