@@ -6,25 +6,23 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.DismissDirection
-import androidx.compose.material.DismissState
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DismissBackground(dismissState: DismissState){
-    val color = when(dismissState.dismissDirection){
-        DismissDirection.StartToEnd -> Color.Red
-        DismissDirection.EndToStart -> Color.Green
-        null -> Color.Transparent
+fun DismissBackground(dismissBoxValue: SwipeToDismissBoxValue){
+    val color = when(dismissBoxValue){
+        SwipeToDismissBoxValue.EndToStart-> Color.Red
+        SwipeToDismissBoxValue.StartToEnd -> Color.Green
+        SwipeToDismissBoxValue.Settled -> Color.Transparent
     }
-    val direction = dismissState.dismissDirection
 
 
     Row(
@@ -35,11 +33,11 @@ fun DismissBackground(dismissState: DismissState){
         verticalAlignment = CenterVertically,
         horizontalArrangement = SpaceBetween
     ){
-        if (direction == DismissDirection.StartToEnd){
+        if (dismissBoxValue == SwipeToDismissBoxValue.StartToEnd){
             Text("No")
         }
         Spacer(modifier = Modifier)
-        if (direction == DismissDirection.EndToStart) {
+        if (dismissBoxValue == SwipeToDismissBoxValue.EndToStart) {
             Text("Yes")
         }
     }

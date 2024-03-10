@@ -1,16 +1,14 @@
 package com.example.thesis_todoapp.ui.components
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Checkbox
-import androidx.compose.material.DismissDirection
-import androidx.compose.material.DismissValue
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.Text
-import androidx.compose.material.rememberDismissState
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,7 +37,7 @@ fun TodoTaskItem(taskName: String, onClose: () -> Unit, modifier: Modifier = Mod
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodoTaskItem(
     taskName: String,
@@ -48,21 +46,21 @@ fun TodoTaskItem(
     onClose: () -> Unit,
     modifier: Modifier = Modifier
 ){
-    val dismissState = rememberDismissState(
-        confirmStateChange = {
-            if(it == DismissValue.DismissedToStart){
+    val dismissBoxState = rememberSwipeToDismissBoxState(
+        confirmValueChange = {
+            if(it == SwipeToDismissBoxValue.EndToStart){
                 onClose()
                 true
             } else false
         }
     )
 
-    SwipeToDismiss(
-        state = dismissState,
-        background = {
-            DismissBackground(dismissState = dismissState)
+    SwipeToDismissBox(
+        state = dismissBoxState,
+        backgroundContent = {
+            DismissBackground(dismissBoxValue = dismissBoxState.currentValue)
         },
-        directions = setOf(DismissDirection.EndToStart)
+        enableDismissFromEndToStart = true
     ) {
 
 
