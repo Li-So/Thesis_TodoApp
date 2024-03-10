@@ -30,6 +30,6 @@ fun TodoTaskItemList(
 @Composable
 fun TodoTaskItemListPreview(){
     ThesisTodoAppTheme {
-        TodoTaskItemList(List(3) { TodoItem(it,"Hello", Date() ) }, onCloseTask = {} )
+        TodoTaskItemList(List(3) { TodoItem(it,"Hello", false, Date() ) }, onCloseTask = {} )
     }
 }

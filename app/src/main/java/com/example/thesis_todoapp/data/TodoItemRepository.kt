@@ -9,5 +9,7 @@ interface TodoItemsRepository {
 
     suspend fun insertTodoItem(todoItem: TodoItem)
 
+    suspend fun updateTodoItem(todoItem: TodoItem)
+
     suspend fun deleteTodoItem(todoItem: TodoItem)
 }

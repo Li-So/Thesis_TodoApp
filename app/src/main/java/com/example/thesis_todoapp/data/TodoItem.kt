@@ -9,5 +9,6 @@ data class TodoItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val label: String,
+    val isChecked: Boolean = false,
     val dateChecked: Date
 )

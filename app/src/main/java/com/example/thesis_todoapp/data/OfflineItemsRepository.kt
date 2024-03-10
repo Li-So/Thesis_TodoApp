@@ -9,5 +9,7 @@ class OfflineItemsRepository(private val todoItemDao: TodoItemDao): TodoItemsRep
 
     override suspend fun insertTodoItem(todoItem: TodoItem) = todoItemDao.insert(todoItem)
 
+    override suspend fun updateTodoItem(todoItem: TodoItem) = todoItemDao.update(todoItem)
+
     override suspend fun deleteTodoItem(todoItem: TodoItem) = todoItemDao.delete(todoItem)
 }
