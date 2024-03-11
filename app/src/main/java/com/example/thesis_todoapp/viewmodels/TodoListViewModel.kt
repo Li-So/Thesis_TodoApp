@@ -17,6 +17,12 @@ class TodoListViewModel(private val todoItemsRepository: TodoItemsRepository): V
         initialValue = TodoItemList()
     )
 
+    val sortedTodoTasks: StateFlow<TodoItemList> = todoItemsRepository.getSortedTodoItemsStream().map { TodoItemList(it) }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+        initialValue = TodoItemList()
+    )
+
     suspend fun updateTodoItem(todoItem: TodoItem){
         todoItemsRepository.updateTodoItem(todoItem)
     }

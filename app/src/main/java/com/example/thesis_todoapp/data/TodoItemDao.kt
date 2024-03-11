@@ -24,4 +24,7 @@ interface TodoItemDao {
 
     @Query("SELECT * from todo_items ORDER BY label ASC")
     fun getAllTodoItems(): Flow<List<TodoItem>>
+
+    @Query("SELECT * FROM todo_items ORDER BY isChecked ASC")
+    fun getSortedTodoItems(): Flow<List<TodoItem>>
 }

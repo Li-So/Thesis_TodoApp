@@ -35,6 +35,7 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
     var todoLabel by rememberSaveable{ mutableStateOf("")}
     val coroutineScope = rememberCoroutineScope()
     val todoList by todoListViewModel.todoTasks.collectAsState()
+    val sortedTodoList by todoListViewModel.sortedTodoTasks.collectAsState()
 
     Column(modifier = Modifier
         .fillMaxWidth(1f)
@@ -62,13 +63,6 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
                 OutlinedButton(
                     onClick = {
                         if(todoLabel != ""){
-                            /*todoListViewModel.add(
-                                TodoItem(
-                                    id = if (todoListViewModel.tasks.isEmpty()) 1 else todoListViewModel.tasks.last().id + 1,
-                                    label = todoLabel,
-                                    dateChecked = Date()
-                                )
-                            )*/
                             coroutineScope.launch {
                                 todoListViewModel.saveTodoItem(
                                     TodoItem(
@@ -87,7 +81,7 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
         }
 
         TodoTaskItemList(
-            list = todoList.todoList,
+            list = sortedTodoList.todoList,
             onCloseTask = { todo ->
                 coroutineScope.launch {
                     todoListViewModel.deleteTodoItem(todo)
