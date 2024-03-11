@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,12 +34,17 @@ fun DismissBackground(dismissBoxValue: SwipeToDismissBoxValue){
         verticalAlignment = CenterVertically,
         horizontalArrangement = SpaceBetween
     ){
-        if (dismissBoxValue == SwipeToDismissBoxValue.StartToEnd){
-            Text("No")
-        }
         Spacer(modifier = Modifier)
         if (dismissBoxValue == SwipeToDismissBoxValue.EndToStart) {
-            Text("Yes")
+            Text("Delete")
         }
     }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+fun PreviewDismissBackground(){
+    DismissBackground(dismissBoxValue = SwipeToDismissBoxValue.EndToStart)
 }

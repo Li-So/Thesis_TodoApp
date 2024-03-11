@@ -1,10 +1,14 @@
 package com.example.thesis_todoapp.ui.components
 
+import android.content.res.Resources.Theme
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
@@ -16,10 +20,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.example.thesis_todoapp.ui.theme.Shapes
+import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 
 
 @Composable
@@ -61,16 +69,19 @@ fun TodoTaskItem(
     SwipeToDismissBox(
         state = dismissBoxState,
         backgroundContent = {
-            DismissBackground(dismissBoxValue = dismissBoxState.currentValue)
+            DismissBackground(dismissBoxValue = dismissBoxState.dismissDirection)
         },
-        enableDismissFromEndToStart = true
+        enableDismissFromEndToStart = true,
+        enableDismissFromStartToEnd = false
     ) {
-
-
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .border(3.dp, Color.Black, RectangleShape),
+                .clip(RoundedCornerShape(topStart = 17.dp, topEnd = 17.dp))
+                .border(0.1.dp, Color.Black)
+                .background(MaterialTheme.colorScheme.background)
+
+                ,
             verticalAlignment = Alignment.CenterVertically
         ){
             Checkbox(checked = checked, onCheckedChange = onCheckedChange)
