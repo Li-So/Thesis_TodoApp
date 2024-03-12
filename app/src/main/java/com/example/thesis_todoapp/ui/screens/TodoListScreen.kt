@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.thesis_todoapp.data.TodoItem
@@ -34,21 +36,15 @@ import java.util.Date
 fun TodoListScreen(todoListViewModel: TodoListViewModel){
     var todoLabel by rememberSaveable{ mutableStateOf("")}
     val coroutineScope = rememberCoroutineScope()
-    val todoList by todoListViewModel.todoTasks.collectAsState()
     val sortedTodoList by todoListViewModel.sortedTodoTasks.collectAsState()
 
     Column(modifier = Modifier
         .fillMaxWidth(1f)
         .fillMaxHeight(1f)
+        .padding(6.dp)
         .background(Color(0xFFF2F2F7))
     ) {
-        Text(
-            text = "Todo List",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .fillMaxWidth()
-        )
+
 
         //val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
         /*TODO*/
@@ -79,6 +75,14 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
                 }
             }
         }
+
+        Text(
+            text = "Todo List",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
 
         TodoTaskItemList(
             list = sortedTodoList.todoList,

@@ -28,51 +28,63 @@ fun TodoTaskItemList(
 ){
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(start = 6.dp, end = 6.dp),
+        contentPadding = PaddingValues(6.dp),
         state = rememberLazyListState()
     ){
         items(items = list, key = {todoTask -> todoTask.id}){
-            if(it.id == list.last().id){
+            if(list.size == 1){
                 TodoTaskItem(
                     taskName = it.label,
                     isChecked = it.isChecked,
                     onCheckedChange = { onCheckedChange(it) },
                     onClose = { onCloseTask(it) },
                     modifier = modifier
-                        .clip(RoundedCornerShape(
-                            bottomStart = 17.dp,
-                            bottomEnd = 17.dp)
-                        )
-                        .border(Dp.Hairline, Color.Black, RoundedCornerShape(
-                            bottomStart = 17.dp,
-                            bottomEnd = 17.dp)
-                        )
-                )
-            } else if(it.id == list.first().id) {
-                TodoTaskItem(
-                    taskName = it.label,
-                    isChecked = it.isChecked,
-                    onCheckedChange = { onCheckedChange(it) },
-                    onClose = { onCloseTask(it) },
-                    modifier = modifier
-                        .clip(RoundedCornerShape(
-                            topStart = 17.dp,
-                            topEnd = 17.dp)
-                        )
-                        .border(Dp.Hairline, Color.Black, RoundedCornerShape(
-                            topStart = 17.dp,
-                            topEnd = 17.dp)
-                        )
+                        .clip(RoundedCornerShape(17.dp))
+                        .border(Dp.Hairline, Color.Black, RoundedCornerShape(17.dp))
                 )
             } else {
-                TodoTaskItem(
-                    taskName = it.label,
-                    isChecked = it.isChecked,
-                    onCheckedChange = { onCheckedChange(it) },
-                    onClose = { onCloseTask(it) },
-                    modifier = modifier
-                        .border(Dp.Hairline, Color.Black)
-                )
+                when(it.id){
+                    list.first().id -> TodoTaskItem(
+                        taskName = it.label,
+                        isChecked = it.isChecked,
+                        onCheckedChange = { onCheckedChange(it) },
+                        onClose = { onCloseTask(it) },
+                        modifier = modifier
+                            .clip(RoundedCornerShape(
+                                topStart = 17.dp,
+                                topEnd = 17.dp)
+                            )
+                            .border(Dp.Hairline, Color.Black, RoundedCornerShape(
+                                topStart = 17.dp,
+                                topEnd = 17.dp)
+                            )
+                    )
+
+                    list.last().id -> TodoTaskItem(
+                        taskName = it.label,
+                        isChecked = it.isChecked,
+                        onCheckedChange = { onCheckedChange(it) },
+                        onClose = { onCloseTask(it) },
+                        modifier = modifier
+                            .clip(RoundedCornerShape(
+                                bottomStart = 17.dp,
+                                bottomEnd = 17.dp)
+                            )
+                            .border(Dp.Hairline, Color.Black, RoundedCornerShape(
+                                bottomStart = 17.dp,
+                                bottomEnd = 17.dp)
+                            )
+                    )
+
+                    else -> TodoTaskItem(
+                        taskName = it.label,
+                        isChecked = it.isChecked,
+                        onCheckedChange = { onCheckedChange(it) },
+                        onClose = { onCloseTask(it) },
+                        modifier = modifier
+                            .border(Dp.Hairline, Color.Black)
+                    )
+                }
             }
         }
     }

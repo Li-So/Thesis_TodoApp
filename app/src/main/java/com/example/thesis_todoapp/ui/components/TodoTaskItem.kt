@@ -72,7 +72,9 @@ fun TodoTaskItem(
             DismissBackground(dismissBoxValue = dismissBoxState.dismissDirection)
         },
         enableDismissFromEndToStart = true,
-        enableDismissFromStartToEnd = false
+        enableDismissFromStartToEnd = false,
+        modifier = modifier
+            .clip(RoundedCornerShape(17.dp))
     ) {
         Row(
             modifier = modifier
