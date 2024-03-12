@@ -41,8 +41,8 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
     Column(modifier = Modifier
         .fillMaxWidth(1f)
         .fillMaxHeight(1f)
-        .padding(6.dp)
         .background(Color(0xFFF2F2F7))
+        .padding(15.dp)
     ) {
 
 
@@ -78,8 +78,8 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
 
         Text(
             text = "Todo List",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp,
+            fontWeight = FontWeight.ExtraBold,
             modifier = Modifier
                 .fillMaxWidth()
         )
