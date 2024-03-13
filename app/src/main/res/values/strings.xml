@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Thesis - TodoApp</string>
+    <string name="delete">Delete</string>
+    <string name="todo_list_is_empty_title">Your todo list is empty</string>
+    <string name="todo_list_is_empty_description">Your todo list is empty! Tap the ´+´ on the toolbar to add new tasks.</string>
+    <string name="todo">Todo</string>
+    <string name="todo_name_placeholder">Todo name</string>
+    <string name="add_button">Add</string>
+    <string name="main_screen_title">Todo List</string>
 </resources>

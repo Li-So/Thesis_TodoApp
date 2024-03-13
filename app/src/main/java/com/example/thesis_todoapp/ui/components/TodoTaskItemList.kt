@@ -22,12 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.thesis_todoapp.R
 import com.example.thesis_todoapp.data.TodoItem
 import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 import java.util.Date
@@ -128,7 +130,7 @@ fun TodoTaskItemList(
                     .background(Color.Gray)
                 )
             Text(
-                text = "Your todo list is empty",
+                text = stringResource(R.string.todo_list_is_empty_title),
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 fontSize = 22.sp,
@@ -136,7 +138,7 @@ fun TodoTaskItemList(
                     .padding(top = 20.dp)
             )
             Text(
-                text = "Your todo list is empty! Tap the ´+´ on the toolbar to add new tasks.",
+                text = stringResource(R.string.todo_list_is_empty_description),
                 color = Color.Gray,
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp,
