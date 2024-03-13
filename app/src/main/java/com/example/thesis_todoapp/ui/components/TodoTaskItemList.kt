@@ -148,11 +148,3 @@ fun TodoTaskItemList(
         }
     }
 }
-
-@Preview
-@Composable
-fun TodoTaskItemListPreview(){
-    ThesisTodoAppTheme {
-        TodoTaskItemList(List(3) { TodoItem(it,"Hello", false, Date() ) }, onCheckedChange = {}, onCloseTask = {} )
-    }
-}

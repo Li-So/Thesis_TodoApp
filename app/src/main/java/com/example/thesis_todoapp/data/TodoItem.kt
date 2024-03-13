@@ -10,5 +10,5 @@ data class TodoItem(
     val id: Int = 0,
     val label: String,
     var isChecked: Boolean = false,
-    val dateChecked: Date
+    var dateChecked: Date
 )

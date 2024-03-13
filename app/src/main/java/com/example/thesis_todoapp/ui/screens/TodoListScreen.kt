@@ -38,7 +38,7 @@ import java.util.Date
 fun TodoListScreen(todoListViewModel: TodoListViewModel){
     var todoLabel by rememberSaveable{ mutableStateOf("")}
     val coroutineScope = rememberCoroutineScope()
-    val sortedTodoList by todoListViewModel.sortedTodoTasks.collectAsState()
+    val sortedTodoItemList by todoListViewModel.sortedTodoItemList.collectAsState()
 
     Column(modifier = Modifier
         .fillMaxWidth(1f)
@@ -84,7 +84,7 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
         )
 
         TodoTaskItemList(
-            list = sortedTodoList.todoList,
+            list = sortedTodoItemList,
             onCloseTask = { todo ->
                 coroutineScope.launch {
                     todoListViewModel.deleteTodoItem(todo)
@@ -93,6 +93,7 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
             onCheckedChange = { todo ->
                 coroutineScope.launch {
                     todo.isChecked = !todo.isChecked
+                    todo.dateChecked = Date()
                     todoListViewModel.updateTodoItem(todo)
                 }
             }

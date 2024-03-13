@@ -8,24 +8,23 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.Date
 import kotlin.time.Duration.Companion.days
 
 class TodoListViewModel(private val todoItemsRepository: TodoItemsRepository): ViewModel() {
-    val sortedTodoTasks: StateFlow<TodoItemList> = todoItemsRepository.getSortedTodoItemsStream().map { TodoItemList(it) }.stateIn(
+    val sortedTodoItemList: StateFlow<List<TodoItem>> = todoItemsRepository.getSortedTodoItemsStream().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-        initialValue = TodoItemList()
+        initialValue = listOf()
     )
     init {
         viewModelScope.launch {
-                sortedTodoTasks.collect{
-                        for (todos in it.todoList){
+                sortedTodoItemList.collect{ todoList ->
+                        for (todos in todoList){
                             deleteOldCheckedTodoItem(todos)
-                            if(todos.id == it.todoList.last().id){
+                            if(todos.id == todoList.last().id){
                                 cancel("Runs only once")
                             }
                         }
@@ -57,5 +56,3 @@ class TodoListViewModel(private val todoItemsRepository: TodoItemsRepository): V
         private const val TIMEOUT_MILLIS = 5_000L
     }
 }
-
-data class TodoItemList(val todoList: List<TodoItem> = listOf())

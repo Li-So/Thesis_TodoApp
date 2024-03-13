@@ -34,7 +34,6 @@ fun DismissBackground(dismissBoxValue: SwipeToDismissBoxValue){
         verticalAlignment = CenterVertically,
         horizontalArrangement = SpaceBetween
     ){
-        Spacer(modifier = Modifier)
         if (dismissBoxValue == SwipeToDismissBoxValue.EndToStart) {
             Text(stringResource(R.string.delete))
         }
