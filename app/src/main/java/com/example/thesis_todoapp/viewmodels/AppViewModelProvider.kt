@@ -8,7 +8,7 @@ import com.example.thesis_todoapp.TodoApplication
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {
-        // Initializer for ItemEntryViewModel
+
         initializer {
             TodoListViewModel(todoApplication().container.todoItemsRepository)
         }
