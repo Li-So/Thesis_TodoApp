@@ -21,10 +21,8 @@ import androidx.compose.ui.unit.dp
 fun DismissBackground(dismissBoxValue: SwipeToDismissBoxValue){
     val color = when(dismissBoxValue){
         SwipeToDismissBoxValue.EndToStart-> Color.Red
-        SwipeToDismissBoxValue.StartToEnd -> Color.Green
-        SwipeToDismissBoxValue.Settled -> Color.Transparent
+        else -> Color.Transparent
     }
-
 
     Row(
         modifier = Modifier

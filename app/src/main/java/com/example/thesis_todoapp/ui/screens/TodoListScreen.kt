@@ -44,10 +44,6 @@ fun TodoListScreen(todoListViewModel: TodoListViewModel){
         .background(Color(0xFFF2F2F7))
         .padding(15.dp)
     ) {
-
-
-        //val list = remember{ List(70) { TodoItem(it, "Hello " + it, Date()) }.toMutableStateList() }
-        /*TODO*/
         SheetAddTodo {
             Column {
                 Text("Task")

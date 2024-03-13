@@ -1,6 +1,5 @@
 package com.example.thesis_todoapp.ui.components
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
@@ -22,12 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.example.thesis_todoapp.ui.theme.Shapes
-import com.example.thesis_todoapp.ui.theme.ThesisTodoAppTheme
 
 
 @Composable
@@ -97,7 +92,4 @@ fun TodoTaskItem(
             )
         }
     }
-
-
-
 }
