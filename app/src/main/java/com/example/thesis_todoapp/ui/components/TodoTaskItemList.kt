@@ -57,56 +57,44 @@ fun TodoTaskItemList(
                             .border(Dp.Hairline, Color.Black, RoundedCornerShape(17.dp))
                     )
                 } else {
-                    when (it.id) {
-                        list.first().id -> TodoTaskItem(
-                            taskName = it.label,
-                            isChecked = it.isChecked,
-                            onCheckedChange = { onCheckedChange(it) },
-                            onClose = { onCloseTask(it) },
-                            modifier = modifier
-                                .clip(
-                                    RoundedCornerShape(
-                                        topStart = 17.dp,
-                                        topEnd = 17.dp
-                                    )
-                                )
-                                .border(
-                                    Dp.Hairline, Color.Black, RoundedCornerShape(
-                                        topStart = 17.dp,
-                                        topEnd = 17.dp
-                                    )
-                                )
+                    val shapeModifier = when(it.id){
+                        list.first().id -> modifier.clip(
+                            RoundedCornerShape(
+                                topStart = 17.dp,
+                                topEnd = 17.dp
+                            )
                         )
-
-                        list.last().id -> TodoTaskItem(
-                            taskName = it.label,
-                            isChecked = it.isChecked,
-                            onCheckedChange = { onCheckedChange(it) },
-                            onClose = { onCloseTask(it) },
-                            modifier = modifier
-                                .clip(
-                                    RoundedCornerShape(
-                                        bottomStart = 17.dp,
-                                        bottomEnd = 17.dp
-                                    )
+                            .border(
+                                Dp.Hairline, Color.Black, RoundedCornerShape(
+                                    topStart = 17.dp,
+                                    topEnd = 17.dp
                                 )
-                                .border(
-                                    Dp.Hairline, Color.Black, RoundedCornerShape(
-                                        bottomStart = 17.dp,
-                                        bottomEnd = 17.dp
-                                    )
+                            )
+                        list.last().id ->  modifier
+                            .clip(
+                                RoundedCornerShape(
+                                    bottomStart = 17.dp,
+                                    bottomEnd = 17.dp
                                 )
-                        )
-
-                        else -> TodoTaskItem(
-                            taskName = it.label,
-                            isChecked = it.isChecked,
-                            onCheckedChange = { onCheckedChange(it) },
-                            onClose = { onCloseTask(it) },
-                            modifier = modifier
-                                .border(Dp.Hairline, Color.Black)
-                        )
+                            )
+                            .border(
+                                Dp.Hairline, Color.Black, RoundedCornerShape(
+                                    bottomStart = 17.dp,
+                                    bottomEnd = 17.dp
+                                )
+                            )
+                        else -> modifier
+                            .border(Dp.Hairline, Color.Black)
                     }
+
+                    TodoTaskItem(
+                        taskName = it.label,
+                        isChecked = it.isChecked,
+                        onCheckedChange = { onCheckedChange(it) },
+                        onClose = { onCloseTask(it) },
+                        modifier = shapeModifier
+                    )
+
                 }
             }
         }
