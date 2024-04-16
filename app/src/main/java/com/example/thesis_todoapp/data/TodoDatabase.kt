@@ -16,8 +16,8 @@ abstract class TodoDatabase : RoomDatabase() {
         private var Instance: TodoDatabase? = null
 
         fun getDatabase(context: Context): TodoDatabase {
-            return Instance?: synchronized(this){
-                Room.databaseBuilder(
+            return synchronized(this){
+                Instance ?: Room.databaseBuilder(
                     context,
                     TodoDatabase::class.java,
                     "todo_item_database"
